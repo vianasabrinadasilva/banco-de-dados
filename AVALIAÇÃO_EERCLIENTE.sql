@@ -59,3 +59,59 @@ insert into tb_cliente values
 
 insert into tb_cliente values
 (null, '444.444.444-44','Victor Guilherme','44444-444','rua','Augusta','854','casa 2','10 de julho','Goiania','GO','9999-1111','', 'victor@gmail');
+
+
+use dbinfox;
+
+create table tb_os(
+idos int auto_increment primary key,
+tipo1 varchar (15) not null,
+situacao varchar(20) not null,
+equipamento varchar(200) not null,
+defeito varchar(200) not null,
+servico varchar(200),
+tecnico varchar(200),
+valor decimal (10,2)
+);
+
+
+describe tb_os;
+
+-- Adicionando data e hora automática
+
+alter table tb_os add data_os timestamp default current_timestamp
+after idos;
+
+-- comando para alterar o start do inicio do auto incremento
+alter table tb_os auto_increment = 10000;
+
+alter table tb_os add idcli int;
+
+alter table tb_os drop column idcli;
+
+alter table tb_os add constraint cliente_os
+foreign key (idcli)
+references tb_cliente (idcli)
+on delete no action;
+
+
+insert into tb_os (idcli,tipo1,situacao,equipamento,defeito,servico,tecnico,valor)
+values ('1','Conserto','Aprovado','Pc','Não liga','Troca de fonte','Sabrina','200');
+
+insert into tb_os (idcli,tipo1,situacao,equipamento,defeito,servico,tecnico,valor)
+values ('2','Conserto','Aprovado','Celular','Display Quebrado','Troca de Display','Sabrina','150');
+
+insert into tb_os (idcli,tipo1,situacao,equipamento,defeito,servico,tecnico,valor)
+values ('4','Conserto','Aprovado','PC','Vírus','Formatação','Sabrina','90');
+
+describe tb_os;
+
+select * from tb_os;
+
+select idos as OS, equipamento as Equipamento, defeito as Defeito, valor as Valor from tb_os;
+
+select  O.idos as OS, data_os as Dataos, equipamento as Equipamento, valor as Valor, tipo1 as Tipo,
+C.namecli as Nome, fone1 as Fone, emailcli as Email, defeito as Defeito, situacao as Situação, servico as Serviço,
+tecnico as Tecnico
+from tb_os as O
+inner join tb_cliente as C on (O.idcli = C.idcli);
