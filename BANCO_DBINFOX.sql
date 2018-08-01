@@ -45,7 +45,7 @@ emailcli varchar (50) not null
 
 describe tb_cliente;
 insert into tb_cliente values
-(null, '123.456.789-10','Sabrina da Silva Viana','01234-567','rua','Luis Gama','162','casa 2','Jardim Moncoes','Santo Andre','SP','1111-2222','', 'sabrina@gmail');
+(null, '123.456.789-10','Sabrina da Silva Viana','01334-567','rua','Luis Gama','162','casa 2','Jardim Moncoes','Santo Andre','SP','1111-2222','', 'sabrina@gmail');
 select * from tb_cliente;
 
 insert into tb_cliente values
